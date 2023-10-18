@@ -40,3 +40,22 @@
   margin: 10px;
   cursor: pointer;
 }
+.shimmer-container {
+  display: flex;
+}
+.shimmer-card {
+  width: 200px;
+  height: 400px;
+  background-color: #c2a9a9;
+  margin: 10px;
+}
+.login-btn {
+  margin: 10px;
+  padding: 10px;
+}
+.filter {
+  display: flex;
+}
+.serach {
+  margin: 10px;
+}
