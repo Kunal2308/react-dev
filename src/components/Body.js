@@ -1,8 +1,11 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import { ShimmerUi } from "./ShimmerUi";
+import { Link } from "react-router-dom";
 const Body = (props) => {
   const { resList } = props;
+  //Local state variable
+  // Whenever state variable update, react triggers a reconciliation cycle(re-render the component)
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [newResList, setNewResList] = useState([]);
@@ -68,7 +71,9 @@ const Body = (props) => {
       </div>
       <div className="res-conainer">
         {newResList.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resObj={restaurant} />
+          <Link className="link-style" to={"/restaurant/" + restaurant.info.id}>
+            <RestaurantCard resObj={restaurant} />
+          </Link>
         ))}
       </div>
     </div>
