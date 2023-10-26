@@ -63,3 +63,8 @@
   text-decoration: none;
   color: #000;
 }
+.user-card {
+  border: 1px solid black;
+  margin: 10px;
+  padding-left: 10px;
+}

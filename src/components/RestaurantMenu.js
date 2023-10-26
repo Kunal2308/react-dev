@@ -13,12 +13,12 @@ export const RestaurantMenu = () => {
     const res = await fetch(MENU_API + resId);
     const menuData = await res.json();
     setResInfo(menuData.data);
-    // console.log(menuData);
+    console.log(menuData);
   };
   if (resInfo === null) return <ShimmerUi />;
   const { name, cuisines, costForTwoMessage } = resInfo.cards[0].card.card.info;
   const { itemCards } =
-    resInfo.cards[2].groupedCard.cardGroupMap.REGULAR.cards[1].card.card;
+    resInfo.cards[3].groupedCard.cardGroupMap.REGULAR.cards[1].card.card;
   return (
     <div className="menu">
       <h1>{name}</h1>

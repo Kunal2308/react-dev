@@ -17,13 +17,15 @@ const Body = (props) => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const jsonData = await data.json();
-    //console.log(jsonData);
+    // console.log(jsonData);
     setListOfRestaurant(
-      jsonData.data.cards[5].card.card.gridElements.infoWithStyle.restaurants
+      jsonData.data.cards[3].card.card.gridElements.infoWithStyle.restaurants
     );
+
     setNewResList(
-      jsonData.data.cards[5].card.card.gridElements.infoWithStyle.restaurants
+      jsonData.data.cards[3].card.card.gridElements.infoWithStyle.restaurants
     );
+    // console.log(listOfRestaurant);
   };
   return listOfRestaurant.length === 0 ? (
     <ShimmerUi />
@@ -37,7 +39,7 @@ const Body = (props) => {
             className="input-box"
             value={searchText}
             onChange={(e) => {
-              console.log(e.target.value);
+              //console.log(e.target.value);
               setSearchText(e.target.value);
               //   e.target.value === ""
               //     ? setNewResList(listOfRestaurant)
@@ -46,7 +48,7 @@ const Body = (props) => {
           ></input>
           <button
             onClick={() => {
-              console.log(searchText);
+              //console.log(searchText);
               setNewResList(
                 listOfRestaurant.filter((res) =>
                   res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -71,7 +73,11 @@ const Body = (props) => {
       </div>
       <div className="res-conainer">
         {newResList.map((restaurant) => (
-          <Link className="link-style" to={"/restaurant/" + restaurant.info.id}>
+          <Link
+            key={restaurant.info.id}
+            className="link-style"
+            to={"/restaurant/" + restaurant.info.id}
+          >
             <RestaurantCard resObj={restaurant} />
           </Link>
         ))}
