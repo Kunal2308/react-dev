@@ -22,6 +22,6 @@ const useRestaurantList = (resId) => {
     );
     // console.log(listOfRestaurant);
   };
-  return { listOfRestaurant, newResList };
+  return { listOfRestaurant, newResList, setListOfRestaurant, setNewResList };
 };
 export default useRestaurantList;

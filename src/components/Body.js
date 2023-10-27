@@ -13,7 +13,8 @@ const Body = (props) => {
   const [searchText, setSearchText] = useState("");
   // const [newResList, setNewResList] = useState([]);
   const onlineStatus = useOnlineStatus();
-  const { listOfRestaurant, newResList } = useRestaurantList();
+  const { listOfRestaurant, newResList, setListOfRestaurant, setNewResList } =
+    useRestaurantList();
   // useEffect(() => {
   //   fetchAPI();
   // }, []);
@@ -46,11 +47,11 @@ const Body = (props) => {
   ) : (
     <div className="body">
       {/* <div className="search">Search</div> */}
-      <div className="filter">
-        <div className="serach">
+      <div className=" flex items-center">
+        <div className="p-4">
           <input
             type="text"
-            className="input-box"
+            className="border border-solid border-black rounded-lg"
             value={searchText}
             onChange={(e) => {
               //console.log(e.target.value);
@@ -61,6 +62,7 @@ const Body = (props) => {
             }}
           ></input>
           <button
+            className="px-4 py-2 m-4 bg-green-100 rounded-lg "
             onClick={() => {
               //console.log(searchText);
               setNewResList(
@@ -73,19 +75,21 @@ const Body = (props) => {
             Search
           </button>
         </div>
-        <button
-          className="filter-btn"
-          onClick={() => {
-            //console.log(listOfRestaurant.info);
-            setNewResList(
-              listOfRestaurant.filter((res) => res.info.avgRating > 4.5)
-            );
-          }}
-        >
-          Top Rated Restaurant
-        </button>
+        <div className="p-4">
+          <button
+            className="px-4 py-2 m-4 bg-gray-100 rounded-lg "
+            onClick={() => {
+              //console.log(listOfRestaurant.info);
+              setNewResList(
+                listOfRestaurant.filter((res) => res.info.avgRating > 4.3)
+              );
+            }}
+          >
+            Top Rated Restaurant
+          </button>
+        </div>
       </div>
-      <div className="res-conainer">
+      <div className="flex flex-wrap m-10">
         {newResList.map((restaurant) => (
           <Link
             key={restaurant.info.id}
