@@ -22,10 +22,10 @@ class UserClass extends React.Component {
     this.setState({
       userInfo: response,
     });
-    console.log(response);
+    // console.log(response);
   }
   componentDidUpdate() {
-    console.log("componentDidUpdate");
+    // console.log("componentDidUpdate");
   }
   componentWillUnmount() {
     console.log("componentWillUnmount");

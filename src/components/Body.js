@@ -1,10 +1,11 @@
-import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import RestaurantCard, { topRatedRestaurant } from "./RestaurantCard";
+import { useContext, useEffect, useState } from "react";
 import { ShimmerUi } from "./ShimmerUi";
 import { Link } from "react-router-dom";
 import { useOnlineStatus } from "../utils/useOnlineStatus";
 import useRestaurantList from "../utils/useRestaurantList";
 import { RES_API } from "../utils/constants";
+import UserContext from "../utils/UserContext";
 const Body = (props) => {
   const { resList } = props;
   //Local state variable
@@ -15,13 +16,15 @@ const Body = (props) => {
   const onlineStatus = useOnlineStatus();
   const { listOfRestaurant, newResList, setListOfRestaurant, setNewResList } =
     useRestaurantList();
+  const RestaurantWithTopRating = topRatedRestaurant(RestaurantCard);
+  const { loggedInUser, setUserName } = useContext(UserContext);
   // useEffect(() => {
   //   fetchAPI();
   // }, []);
   // const fetchAPI = async () => {
   //   const data = await fetch(RES_API);
   //   const jsonData = await data.json();
-  //   // console.log(jsonData.data);
+  //    console.log(jsonData.data);
   //   setListOfRestaurant(
   //     jsonData?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
   //       ?.restaurants
@@ -31,8 +34,10 @@ const Body = (props) => {
   //     jsonData?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
   //       ?.restaurants
   //   );
-  //   // console.log(listOfRestaurant);
+  //    console.log(listOfRestaurant);
   // };
+  // console.log(listOfRestaurant);
+
   if (onlineStatus === false) {
     return (
       <>
@@ -81,12 +86,20 @@ const Body = (props) => {
             onClick={() => {
               //console.log(listOfRestaurant.info);
               setNewResList(
-                listOfRestaurant.filter((res) => res.info.avgRating > 4.3)
+                listOfRestaurant.filter((res) => res.info.avgRating > 4)
               );
             }}
           >
             Top Rated Restaurant
           </button>
+        </div>
+        <div className="p-4">
+          <label className="px-2">User Name:</label>
+          <input
+            className="p-1 border border-black"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          ></input>
         </div>
       </div>
       <div className="flex flex-wrap m-10">
@@ -96,7 +109,11 @@ const Body = (props) => {
             className="link-style"
             to={"/restaurant/" + restaurant.info.id}
           >
-            <RestaurantCard resObj={restaurant} />
+            {restaurant.info.avgRating > 4 ? (
+              <RestaurantWithTopRating resObj={restaurant} />
+            ) : (
+              <RestaurantCard resObj={restaurant} />
+            )}
           </Link>
         ))}
       </div>
