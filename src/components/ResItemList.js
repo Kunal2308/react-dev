@@ -1,9 +1,17 @@
 import React from "react";
 import { CDN_URL } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 
 export const ResItemList = ({ items }) => {
-  console.log(items);
+  //console.log(items);
 
+  const dispatch = useDispatch();
+
+  const handleAddItem = (item) => {
+    //dispatch an action
+    dispatch(addItem(item));
+  };
   return (
     <div>
       {items.map((item) => (
@@ -32,7 +40,12 @@ export const ResItemList = ({ items }) => {
               ) : (
                 ""
               )}
-              <button className=" px-3 py-1 rounded-lg bg-gray-200 border-solid border-2 font-bold text-green-400">
+              <button
+                onClick={() => {
+                  handleAddItem(item);
+                }}
+                className=" px-3 py-1 rounded-lg bg-gray-200 border-solid border-2 font-bold text-green-400"
+              >
                 ADD+
               </button>
             </div>

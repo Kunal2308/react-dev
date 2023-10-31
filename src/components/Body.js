@@ -16,6 +16,7 @@ const Body = (props) => {
   const onlineStatus = useOnlineStatus();
   const { listOfRestaurant, newResList, setListOfRestaurant, setNewResList } =
     useRestaurantList();
+  console.log(listOfRestaurant);
   const RestaurantWithTopRating = topRatedRestaurant(RestaurantCard);
   const { loggedInUser, setUserName } = useContext(UserContext);
   // useEffect(() => {
